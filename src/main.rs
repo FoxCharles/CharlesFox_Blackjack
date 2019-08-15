@@ -86,13 +86,9 @@ impl Deck {
                 else {
                     shuffle_stack_2.push(card.clone());
                 }
-            }
-            //self.stack = Vec::new();       
+            }    
             shuffle_stack_1.append(&mut shuffle_stack_2);
             self.stack = shuffle_stack_1;
-            //for card in &shuffle_stack_1 {
-            //    self.stack.push(card);
-            //}
         }
     }
     
@@ -214,7 +210,6 @@ fn main() {
                 invalid = true;
             }
         }
-        //println!("{:?}", input);
     }
     let mut playing = true;
     let mut main_deck = Deck::new();
@@ -247,15 +242,10 @@ fn main() {
     handle_dialog("quit".to_string(), difficulty);
 }
 
-//    for i in 0..3 {
-//      deck2.stack.push(deck.stack.pop().unwrap());
-//    }
-
 fn gamelogic(difficulty:u64, cheat_percent:u64, card_limit:u64, main_deck:&mut Deck, player_deck:&mut Deck, dealer_deck:&mut Deck, discard_deck:&mut Deck) {
     //Start round, hand out two cards each
     for i in 0..4 {
         if main_deck.stack.len() == 0 {
-            //implement moving discard_deck to main_deck.
             for _i in 0..discard_deck.stack.len() {
                 main_deck.stack.push(discard_deck.stack.pop().unwrap());
                 main_deck.shuffle();
@@ -267,12 +257,7 @@ fn gamelogic(difficulty:u64, cheat_percent:u64, card_limit:u64, main_deck:&mut D
         else {
             dealer_deck.stack.push(main_deck.stack.pop().unwrap());
         }
-    }
-    println!("Your cards: {}",player_deck.print_deck());
-    //Only show dealer's first card.
-    //println!("Dealer's cards: {}",dealer_deck.print_deck());
-    
-    
+    }    
     //loop
     let mut game_running = true;
     let mut player_playing = true;
@@ -318,7 +303,6 @@ fn gamelogic(difficulty:u64, cheat_percent:u64, card_limit:u64, main_deck:&mut D
                 match get_input().as_str() {
                     "h"|"H" => {
                         if main_deck.stack.len() == 0 {
-                            //implement moving discard_deck to main_deck.
                             for _i in 0..discard_deck.stack.len() {
                                 main_deck.stack.push(discard_deck.stack.pop().unwrap());
                                 main_deck.shuffle();
@@ -372,7 +356,6 @@ fn gamelogic(difficulty:u64, cheat_percent:u64, card_limit:u64, main_deck:&mut D
         //dealer chooses
         if dealer_playing {
             if main_deck.stack.len() == 0 {
-                //implement moving discard_deck to main_deck.
                 for _i in 0..discard_deck.stack.len() {
                     main_deck.stack.push(discard_deck.stack.pop().unwrap());
                     main_deck.shuffle();
@@ -398,7 +381,6 @@ fn gamelogic(difficulty:u64, cheat_percent:u64, card_limit:u64, main_deck:&mut D
                 let dealer_value = dealer_deck.count_deck(1);
                 if dealer_value <= card_limit {
                     if main_deck.stack.len() == 0 {
-                        //implement moving discard_deck to main_deck.
                         for _i in 0..discard_deck.stack.len() {
                             main_deck.stack.push(discard_deck.stack.pop().unwrap());
                             main_deck.shuffle();
@@ -421,8 +403,6 @@ fn gamelogic(difficulty:u64, cheat_percent:u64, card_limit:u64, main_deck:&mut D
                 game_running = false;
             }            
         }
-        //player_playing = false;
-        //dealer_playing = false;
         if !dealer_playing && !player_playing {
             game_running = false;
         }
@@ -463,8 +443,6 @@ fn gamelogic(difficulty:u64, cheat_percent:u64, card_limit:u64, main_deck:&mut D
         discard_deck.stack.push(dealer_deck.stack.pop().unwrap());
     }
     handle_dialog(msgtype, difficulty);
-    
-    //println!("Discard Deck: {}",discard_deck.print_deck());
 }
 
 fn handle_dialog(msgtype:String, difficulty:u64) {
