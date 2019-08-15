@@ -1,0 +1,8 @@
+[package]
+name = "CharlesFox_Blackjack"
+version = "0.1.0"
+authors = ["fcharles <fcharles@pdx.edu>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.7"
